@@ -1,0 +1,19 @@
+cd /var/log
+Sudo less /var/log/auth.log
+Sudo lastb
+last 
+journalctl | less
+journalctl | grep "Failed"
+journalctl | grep ssh
+journalctl | grep -i error
+
+
+
+
+Apache Log Analys
+
+cd /var/log/apache2 ls
+sudo less access.log
+grep "404" /var/log/apache2/access.log
+less /var/log/dpkg.log
+sudo journalctl -f
