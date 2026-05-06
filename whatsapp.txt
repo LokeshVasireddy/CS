@@ -15,7 +15,7 @@ cd WhatsAppWeb-linux-x64
 3. Search for WhatsApp
 Observations
 
-
+Step 1: Install WhatsApp APK (Optional in Emulator)• Download APK from trusted source or use your mobile
 Step 2: Start Wireshark
 Search Wireshark
 
@@ -35,7 +35,8 @@ Search Burpsuite
 
 Step 3: Configure Proxy• IP: 127.0.0.1• Port: 8080In browser:• Settings → Network → Manual Proxy
 
-Step 4: Intercept Traffic• Turn Intercept ON• Reload Facebook
+Step 4: Intercept Traffic
+.go to proxy• Turn Intercept ON• Reload Facebook
 
 Press F12 → Network tabLook for:• Ads• Analytics scripts• Third-party requests
 

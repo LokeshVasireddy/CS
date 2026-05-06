@@ -1,6 +1,4 @@
 cd /var/log
-Sudo less /var/log/auth.log
-Sudo lastb
 last 
 journalctl | less
 journalctl | grep "Failed"
@@ -17,3 +15,22 @@ sudo less access.log
 grep "404" /var/log/apache2/access.log
 less /var/log/dpkg.log
 sudo journalctl -f
+
+
+Finished phpsessionclean.service Finished systemdtmpfiles-clean.service
+
+kali : COMMAND=/usr/bin/less access.log kali :COMMAND=/usr/bin/journalctl -f
+
+xfconfd.service started
+
+sudo apt install openssh-server –y
+sudo service ssh start
+ip a
+Sudo service ssh start
+
+run:ssh fakeuser@localhostORssh kali@localhost
+Enter wrong password multiple times (5–10 times)
+
+journalctl | grep "Failed password"
+journalctl | grep "Failed password" | awk '{print $11}'
+journalctl | grep "Failed password" | awk '{print $11}' | sort | uniq -c | sort -nr

@@ -1,0 +1,21 @@
+echo "Cybersecurity Lab Evidence" > evidence.txt
+Ls
+lsblk
+install dc3dd
+dd if=/dev/zero of=practice_disk.dd bs=1M count=100mkfs.ext4 practice_disk.dd
+ls -lh /home/kali/disk_image.dd
+cat /home/kali/acquisition.log
+
+autopsy
+sudo autopsy
+http://localhost:9999/autopsy Open this link
+
+Click Create New Case
+Add Host → Add Image
+Browse and select:/home/kali/disk_image.dd
+
+Add host
+Host name: KaliLabMachine
+
+Add image
+Location: /home/kali/disk_image.dd
