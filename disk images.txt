@@ -1,3 +1,7 @@
+Press:Ctrl + Alt + TThis opens the terminal.
+
+
+
 echo "Cybersecurity Lab Evidence" > evidence.txt
 Ls
 lsblk

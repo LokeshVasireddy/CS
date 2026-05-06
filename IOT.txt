@@ -14,4 +14,4 @@ Step 4: Nmap Version Scan (-sV)• nmap -sV 192.168.x.x output• Showing serv
 he simulated IoT device dashboard was accessed through the browser using:http://localhost:8090
 
 
-Step 7: Developer Tools → Network Tab• Network tab showing HTTP requests• Plain text traffic visible
+Step 7: Developer Tools → Network Tab(F12 or Ctrl + Shift + I)• Network tab showing HTTP requests• Plain text traffic visible
