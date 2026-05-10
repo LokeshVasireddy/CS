@@ -1,0 +1,43 @@
+sudo apt update
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo docker run -d -p 3000:3000 --name juice-shop bkimminich/juice-shop
+sudo docker ps
+http://localhost:3000
+Open Burp Suite
+2. Proxy → Intercept ON
+3. Set browser proxy:o IP: 127.0.0.1o Port: 8080
+PART A: AUTHENTICATION TESTINGTest 1: SQL Injection Login BypassSteps:1. Open Login page2. Enter:Email: ' OR 1=1 --Password: anything
+3. Forward request in Burp
+Result:Login successful without valid credentialsInference:Application is vulnerable to SQL InjectionTest 2: Weak Password PolicySteps:1. Register new account2. Use password:12345Inference:No password complexity enforcementTest 3: Brute Force AttackSteps:1. Capture login request in Burp
+2. Send to Intruder
+3. Select password field
+4. Load wordlist:/usr/share/wordlists/rockyou.txt
+5. Start attackResult:Password discovered
+Test 4: Username EnumerationSteps:• Try valid email + wrong password
+• Try invalid email + wrong password
+Result:
+Different error messagesInference:System reveals valid usernames
+
+
+Test 5: Session Cookie AnalysisSteps:1. Login2. Press F12 → Application → Cookies
+Result:
+Session token visible
+Inference:Check for HTTPOnly & Secure flagsTest 6: Session HijackingSteps:1. Copy session cookie2. Open another browser3. Replace cookie
+Result:
+Access without loginInference:Session not properly protected
+Test 7: Session FixationSteps:1. Note session ID before login2. Login3. Compare session ID
+
+Using Burp SuiteStep 1: Intercept Login Request• Turn Intercept ON• Login in browserStep 2: Check ResponseGo to:Proxy → HTTP HistoryClick login requestStep 3: Find TokenCheck:• Response tab• OR Headers:
+
+Set-Cookie: token=(copied one)
+
+Result:Same session ID
+
+Test 8: Logout MechanismSteps:1. Login → copy cookie2. Logout3. Reuse cookieResult:Session still activeInference:Session not invalidated properlyTest 9: JWT Token AnalysisSteps:1. Copy token2. Decode in jwt.ioResult:Payload visibleScreenshot 13: JWT decodingInference:Improper token validation possible
+
+
+
+DVWA
+-----
