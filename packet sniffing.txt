@@ -1,0 +1,17 @@
+python3 -m http.server 8080
+
+Step 4: In another new terminal start packet capture: sudotcpdump -i any -w capture.pcap port 8080
+http://localhost:8080
+
+Go back to tcpdump terminal.Stop packet capturing by using Ctrl + C.It will stop and show how many packets were capturedThe packets are saved as capture.pcap.
+
+
+• Click the Kali Linux dragon icon (top left).• Type: File Manager and open it.• Your Home folder will open.• You will see the file: capture.pcap.
+
+
+Since Wireshark is pre-installed in Kali, just double-click capture.pcap.• The file will open directly in Wireshark for analysis.
+
+
+Step 9:-Filter Login PacketsIn Wireshark filter bar, type: http.request.method == "POST"Press Enter.Now only important packets will show.
+
+Click on any one of the packet and the following data is displayed.
