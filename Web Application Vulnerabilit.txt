@@ -1,26 +1,0 @@
-Step 1: Install OWASP ZAP on Windows1. Go to the official sitehttps://www.zaproxy.org/download/2. Download the Windows Installer3. Run the installer and follow the setup.After installation open:OWASP ZAPStep 2: Install Node.jsJuice Shop runs using Node.js.1. Go tohttps://nodejs.org2. Download LTS version3. Install with default settings.Step 3: Install OWASP Juice ShopOpen Command Prompt.Run:docker run --rm -p 3000:3000 bkimminich/juice-shopORdocker run -d -p 3000:3000 bkimminich/juice-shop
-
-
-Go to the folder:cd juice-shopInstall dependencies:npm installStart the application:npm start
-
-http://localhost:3000
-Open OWASP ZAP.
-Click Start.
-
-
-Step 6: Configure Browser ProxyIn browser proxy settings configure:HTTP Proxy : 127.0.0.1Port : 8080
-
-
-Step 7: Confirm ConnectionOpen:http://localhost:3000In ZAP Sites panel you will see:http://localhost:3000Step 8: Perform Spider ScanRight-click:http://localhost:3000Select:
-Attack → SpiderClick Start Scan
-
-
-Step 9: Perform Active ScanRight-click again:http://localhost:3000Select:Attack → Active ScanClick Start Scan.
-ZAP will test vulnerabilities.Step 10: Analyze VulnerabilitiesOpen the Alerts tab
-
-
-Step 11: View AlertsGo to:Alerts TabAlerts are categorized by risk:Risk Level MeaningHigh Critical vulnerabilityMedium Exploitable issueLow Minor issueInformational No direct riskClick any alert to view:• Description• Evidence• Attack payload used• Suggested remediation
-
-
-Step 12: Export Scan Report1. Go to Report2. Choose format:o HTMLo PDFo XML3. Select:o Risk levelso Confidence level4. Generate reportSave file.
-

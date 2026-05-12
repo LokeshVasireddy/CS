@@ -1,0 +1,17 @@
+3. Switch to Root User:
+ - Gain root access by executing the following command:
+ sudo su
+ 4. Create a Directory:
+ - Make a directory named "efs" using the following command:
+ mkdir efs
+ 5. Install Amazon EFS Utilities:
+ - Use yum package manager to install the Amazon EFS utilities:
+ yum install -y amazon-efs-
+
+
+Step 4: Attaching EFS to EC2 Instances
+1. Go to the EFS service in the AWS Management Console.
+2. Click on the target EFS file system.
+3. Click on the "Attach" button. 
+
+Touch fs
